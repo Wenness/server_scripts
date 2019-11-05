@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
 <settings>
-    <servernaam>FileServer12</servernaam> <!--Vul hier de servernaam in-->
+    <servernaam>AgentTest01</servernaam> <!--Vul hier de servernaam in-->
     <databaselocatie>G:\Studie\Automation\SQLite\data.db</databaselocatie> <!--Vul hier het absolute pad in naar de database-->
 </settings>
