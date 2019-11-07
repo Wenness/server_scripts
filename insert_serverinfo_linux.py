@@ -8,6 +8,8 @@ import shutil
 import pymysql
 # psutil voor het aanroepen van CPU en geheugen informatie
 import psutil
+# socket voor het aanroepen van systeem naam
+import socket
 # xml.etree.cElementTree voor het aanroepen van het XML configuratie betand
 import xml.etree.cElementTree as etree
 # datetime date voor het aanroepren van de datum
