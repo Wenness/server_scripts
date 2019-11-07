@@ -20,7 +20,7 @@ def read_config(config): # Voor het aanroepen config bestand
 
     # Let op: Plaats het XML bestand in dezelfde folder als dit script
     # Locatie XML bestand
-    file_location = './config_insert.xml'
+    file_location = '/script/config_insert.xml'
 
     # Probeer het bestand te vinden
     try:
