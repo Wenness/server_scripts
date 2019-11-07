@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<settings>
+    <databaselocatie>G:\Studie\Automation\SQLite\data.db</databaselocatie> <!--Vul hier het absolute pad in naar de database-->
+</settings>
