@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<settings>
-    <servernaam>FileServer12</servernaam> <!--Vul hier de servernaam in-->
-    <db_host>172.34.1.5</db_host> <!--Vul hier het IP van de MySQL server in-->
-    <db_user>admin</db_user> <!--Vul hier de user van de MySQL server in-->
-    <db_password>P@ssword</db_password> <!--Vul hier de password van de MySQL server in-->
-    <db_name>bennodb</db_name> <!--Vul hier de naam van de database van de MySQL server in-->
-</settings>
