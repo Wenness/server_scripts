@@ -8,6 +8,8 @@ import shutil
 import pymysql
 # psutil voor het aanroepen van CPU en geheugen informatie
 import psutil
+# socket voor het aanroepen van de systeemnaam
+import socket
 # xml.etree.cElementTree voor het aanroepen van het XML configuratie betand
 import xml.etree.cElementTree as etree
 # datetime date voor het aanroepren van de datum
@@ -51,9 +53,9 @@ def create_connection(): # Aanmaken van de database connectie
 def fetch_tables(): # Voor het checken van alle tabellen in de database
     
     # Variabele voor database connectie
-    conn = create_connection() # Later in script cur
+    conn = create_connection() 
     # Cursor voor SQL
-    cursor = conn.cursor()
+    cursor = conn.cursor() # Later in script cur
     cursor.execute("SELECT table_name FROM information_schema.tables;") # Het SQL commando gaat alle tabellen na
     
     return(cursor.fetchall()) # De cursor 'fetched' alle tabel namen
@@ -62,15 +64,15 @@ def create_table(conn, create_table_sql): # Voor het aanmaken van een nieuwe tab
     
     # Probeer een tabel te maken
     try:
-        c = conn.cursor()
-        c.execute(create_table_sql)
+        cur = conn.cursor()
+        cur.execute(create_table_sql)
     except Exception as e:
         print(e)
 
 def fill_serverinfo(conn, table_name): # Voor het invullen van de tabel
 
     # Vind de servernaam locatie in het config bestand
-    servernaam = read_config('servernaam')
+    servernaam = socket.gethostname()
     # SQL commando met alle tabel waarden
     sql = ''' INSERT INTO ''' + str(servernaam) + ''' (date_today,time,storage_total,storage_used,storage_free,cpu_usage_percentage,mem_usage_percentage,uptime_day,uptime_hour,uptime_minute,uptime_second)
               VALUES('{}','{}',{},{},{},{},{},{},{},{},{}); '''.format(str(table_name[0]), str(table_name[1]), table_name[2], table_name[3], table_name[4], table_name[5], table_name[6], table_name[7], table_name[8], table_name[9], table_name[10])
@@ -99,7 +101,7 @@ def sys_info(): # Voor het aanroepen van CPU usage, geheugen usage en uptime
 def create_new_server_table(): # Voor het aanmaken van de daadwerkelijke tabel
     
     conn = create_connection()
-    servernaam = read_config('servernaam')
+    servernaam = socket.gethostname()
 
     sql_create_server_table = '''CREATE TABLE IF NOT EXISTS `{}`
                                     (`date_today` TEXT,
@@ -156,7 +158,7 @@ def insert_serverinfo(): # Voor het invullen van de tabel
         fill_serverinfo(conn, table_name)
 
 # Als de servernaam niet in de lijst met tabellen staat: Maak een tabel met de servernaam en vul deze aan
-if read_config('servernaam') not in str(fetch_tables()):
+if str(socket.gethostname()) not in str(fetch_tables()):
     create_new_server_table()
     insert_serverinfo()
 # Anders vul alleen de bestaande tabel aan
