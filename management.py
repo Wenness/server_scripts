@@ -8,15 +8,11 @@ import cgi
 import xml.etree.cElementTree as etree
 # MySQL als database module
 import pymysql
-# pathlib Path voor het aanroepen van de XML configuratie
-from pathlib import Path
 
 def read_config(config): # Functie voor het aanroepen config bestand
 
-    # Locatie waarin dit script zich bevindt
-    location = Path(__file__).resolve().parent
-    # Uiteindelijke locatie XML bestand
-    file_location = str(location) + '\config_management.xml'
+    # locatie XML bestand
+    file_location = './config_management.xml'
 
     # Probeer het bestand te vinden
     try:
